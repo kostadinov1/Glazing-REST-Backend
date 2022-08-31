@@ -16,6 +16,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', '127.0.0.1').split(' ')
 
 REST_FRAMEWORK = {
+
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
@@ -112,7 +113,7 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
-MEDIA_DIRS = [
-    BASE_DIR / 'mediafiles'
-]
+# MEDIA_DIRS = [
+#     BASE_DIR / 'mediafiles'
+# ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

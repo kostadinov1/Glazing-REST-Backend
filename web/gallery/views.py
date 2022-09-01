@@ -14,9 +14,11 @@ class AlbumsListView(ListAPIView):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
 
-class AlbumCRUDView(RetrieveAPIView):
+class GetAlbumView(RetrieveAPIView):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
+
+
 
 
 class UploadImageViewSet(CreateAPIView):

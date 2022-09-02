@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     'web.core',
     'web.gallery',
+    'web.products',
+    'web.services',
 ]
 
 MIDDLEWARE = [

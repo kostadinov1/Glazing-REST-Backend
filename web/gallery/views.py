@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 
 from web.gallery.models import Album, Image
 from web.gallery.serializers import AlbumSerializer, ImageSerializer
@@ -17,8 +16,6 @@ class AlbumsListView(ListAPIView):
 class GetAlbumView(RetrieveAPIView):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
-
-
 
 
 class UploadImageViewSet(CreateAPIView):

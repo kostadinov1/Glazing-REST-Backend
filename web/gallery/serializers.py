@@ -10,7 +10,6 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class AlbumSerializer(serializers.ModelSerializer):
     image_set = ImageSerializer(many=True)
 

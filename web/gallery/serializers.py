@@ -4,10 +4,10 @@ from web.gallery.models import Album, Image
 
 
 class ImageSerializer(serializers.ModelSerializer):
-
+    image_file = serializers.ImageField()
     class Meta:
         model = Image
-        fields = '__all__'
+        fields = ('image_file', 'album_id')
 
 
 class AlbumSerializer(serializers.ModelSerializer):

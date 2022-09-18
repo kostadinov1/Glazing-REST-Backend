@@ -18,6 +18,11 @@ def scramble_uploaded_filename(instance, filename):
 
 
 class Image(models.Model):
+
     image_file = models.ImageField(upload_to=scramble_uploaded_filename)
     created_on = models.DateTimeField(auto_now_add=True)
     album_id = models.ForeignKey(Album, related_name='image_set', on_delete=models.CASCADE,)
+
+    def __unicode__(self):
+        return str(self.id)
+

@@ -9,7 +9,7 @@ urlpatterns = (
     path('create-album/', CreateAlbumView.as_view(), name='create album'),
     path('edit-album/<int:pk>/', GetAlbumView.as_view(), name='edit album'),
 
-    path('upload-image/', UploadImageViewSet.as_view(), name='create image'),
+    path('upload-image/<int:pk>/', UploadImageViewSet.as_view(), name='create image'),
     path('edit-image/<int:pk>/', ImageCRUDView.as_view(), name='edit image'),
 
 

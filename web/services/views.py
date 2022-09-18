@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 
-from web.services.models import Service
-from web.services.serializers import ServiceSerializer
+from web.services.models import Service, CompanyInfo
+from web.services.serializers import ServiceSerializer, CompanyInfoSerializer
 
 
 class CreateServiceView(CreateAPIView):
@@ -19,3 +19,7 @@ class GetServiceView(RetrieveAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
+
+class GetCompanyInfoView(RetrieveAPIView):
+    queryset = CompanyInfo.objects.all()
+    serializer_class = CompanyInfoSerializer

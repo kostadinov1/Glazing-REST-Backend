@@ -14,6 +14,7 @@ class CompanyInfo(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=5000, null=True, blank=True)
     address = models.TextField(max_length=300, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
     phone = models.TextField(max_length=300, null=True, blank=True)
     mobile_phone = models.TextField(max_length=300, null=True, blank=True)
 

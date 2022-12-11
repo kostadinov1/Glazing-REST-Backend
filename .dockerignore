@@ -1,0 +1,13 @@
+
+.git
+.gitignore
+.dockerignore
+
+dograma/__pycache__
+dograma/*/__pycache__
+dograma/*/*/_pycache__
+dograma/*/*/*__pycache__
+.env
+.venv
+/venv
+

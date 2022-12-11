@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+
+import dj_database_url
 import psycopg2
 from decouple import config
 from pathlib import Path
@@ -8,28 +10,49 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 APP_ENVIRONMENT = config('APP_ENVIRONMENT')
 
-
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', '127.0.0.1').split(' ')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS',).split(' ')
+CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:8000',
-
-]
-
+# CORS_ALLOWED_ORIGINS = [
+#     'http://127.0.0.1',
+#     'http://localhost',
+#     'http://127.0.0.1:3000',
+#     'http://127.0.0.1:8000',
+#     'http://dogramavarna.net',
+#     'http://www.dogramavarna.net',
+#     'https://dogramavarna.net',
+#     'https://www.dogramavarna.net',
+# ]
 
 REST_FRAMEWORK = {
-
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    ]
 
-# Application definition
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,7 +103,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
-
 DEFAULT_DATABASE_CONFIG = {
     'ENGINE': 'django.db.backends.postgresql',
     'HOST': config('DB_HOST'),
@@ -93,6 +115,14 @@ DEFAULT_DATABASE_CONFIG = {
 DATABASES = {
     'default': DEFAULT_DATABASE_CONFIG,
 }
+if APP_ENVIRONMENT == 'Production':
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+    DATABASE_URL = os.environ['DATABASE_URL']
+
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -120,12 +150,21 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 # MEDIA_DIRS = [
-#     BASE_DIR / 'mediafiles'
+#     BASE_DIR / 'mediafiles',
 # ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True

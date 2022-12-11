@@ -130,3 +130,11 @@ dmypy.json
 
 
 postgresql/
+
+# deployment
+/Dockerfile
+/.dockerignore
+/.env
+/Procfile
+.gitignore
+/mediafiles

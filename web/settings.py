@@ -110,6 +110,7 @@ DEFAULT_DATABASE_CONFIG = {
     'NAME': config('DB_NAME'),
     'USER': config('DB_USER'),
     'PASSWORD': config('DB_PASSWORD'),
+    'OPTIONS': {'sslmode': 'require'},
 }
 
 DATABASES = {
@@ -163,8 +164,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 #     BASE_DIR / 'mediafiles',
 # ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# SECURE_SSL_REDIRECT = False
 
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = False
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
